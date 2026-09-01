@@ -1,0 +1,52 @@
+{
+  "rootAgent": {
+    "name": "supervisorAgent",
+    "type": "supervisor",
+    "description": "supervisor-agent.md",
+    "maxAgentsInvocations": 1,
+    "model": {
+      "temperature": 0.0
+    },
+    "subAgents": [
+      {
+        "name": "loopAgent",
+        "type": "loop",
+        "description": "loop-agent.md",
+        "maxIterations": 10,
+        "subAgents": [
+          {
+            "name": "workerAgent",
+            "type": "worker",
+            "description": "worker-agent.md",
+            "systemMessage": "worker-system.md",
+            "model": {
+              "temperature": 0.3
+            },
+            "tools": [
+              "AskUserQuestion", "Bash", "Edit", "Glob", "Grep", "Read", "Write","WebFetch"
+            ]
+          }
+        ]
+      },{
+        "name": "newsLoopAgent",
+        "type": "loop",
+        "description": "news-loop-agent.md",
+        "maxIterations": 10,
+        "subAgents": [
+          {
+            "name": "newsAgent",
+            "type": "worker",
+            "description": "news-agent.md",
+            "systemMessage": "news-system.md",
+            "model": {
+              "temperature": 0.3
+            },
+            "tools": [
+              "AskUserQuestion","WebFetch","WebSearch"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

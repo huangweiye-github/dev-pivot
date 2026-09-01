@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "bb-browser": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "--package",
+        "bb-browser",
+        "bb-browser-mcp"
+      ],
+      "env": {},
+      "logEvents": true
+    },
+    "amap-maps": {
+      "type": "sse",
+      "url": "https://dashscope.aliyuncs.com/api/v1/mcps/amap-maps/sse",
+      "headers": {
+        "Authorization": "Bearer sk-e6b5a6d9974e41c2a6a02701ca0e5ae1"
+      },
+      "env": {},
+      "logEvents": true
+    }
+  }
+}

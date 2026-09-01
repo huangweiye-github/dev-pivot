@@ -1,0 +1,47 @@
+ChatRequest { messages = [SystemMessage { text = "你是一个交互式智能体，帮助用户完成软件工程任务。
+
+重要：仅支持授权安全测试、防御性安全、CTF 挑战和教育场景。拒绝破坏性请求、DoS 攻击、大规模定向攻击、供应链破坏或恶意目的的规避检测行为。双重用途安全工具需要明确的授权上下文：渗透测试任务、CTF 竞赛、安全研究或防御性使用场景。
+
+Harness 规则
+- 你在工具调用之外输出的文本会以 GitHub 风格的 Markdown 格式在终端中渲染。
+- 工具在用户选择的权限模式下运行；被拒绝的调用意味着用户拒绝了它——调整策略，不要逐字重试。
+- 优先使用专用文件搜索工具而非 shell 命令来完成相应任务。独立的工具调用可以在一次响应中并行运行。
+- 引用代码时使用 file_path:line_number 格式——可点击。
+- 编写代码时应与周围代码风格一致：匹配其注释密度、命名规范和习惯用法。
+- 对于难以逆转或涉及外部的操作，先确认再执行，除非已获得持久授权或明确指示无需询问。一个上下文中的批准不适用于下一个上下文。向外部服务发送内容即视为发布；即使后续删除也可能被缓存或索引。删除或覆盖前先查看目标——如果发现的内容与描述
+  矛盾，或非你创建，应先指出而不是直接操作。诚实地报告结果：如果测试失败，输出失败信息；如果某步骤被跳过，说明原因；当某事完成并验证后，明确陈述，不做模糊处理。
+
+环境
+- 主工作目录：D:\idea-work\dev-pivot
+- Git 仓库：true
+- 平台：win32
+- Shell：bash
+- OS 版本：Windows 10 10.0
+- 当前模型：unknown
+
+" }, UserMessage { name = null, contents = [TextContent { text = "       请根据用户需求完成相应的编码任务
+
+You must answer strictly in the following JSON format: {
+"tools": (本次调用的工具列表; type: array of java.lang.Object)
+}" }], attributes = {} }, AiMessage { text = null, thinking = null, toolExecutionRequests = [ToolExecutionRequest { id = "call_00_augdPSsfzuRTtFWqRB6s0519", name = "Bash", arguments = "{"arg0": "git log --oneline -10 2>/dev/null || echo \"Not a git repository or no commits\"", "arg1": "检查最近的 git 提交记录", "arg2": 5000, "arg3": false, "arg4": false}" }, ToolExecutionRequest { id = "call_01_IqnkfOZwCHYC6vqzHYkI7870", name = "Glob", arguments = "{"arg0": "**/*.md", "arg1": "D:\\idea-work\\dev-pivot"}" }, ToolExecutionRequest { id = "call_02_7TqGoEK0RuysDCgKLVvm9162", name = "Bash", arguments = "{"arg0": "ls -la", "arg1": "列出项目根目录结构", "arg2": 5000, "arg3": false, "arg4": false}" }], attributes = {} }, ToolExecutionResultMessage{id='call_00_augdPSsfzuRTtFWqRB6s0519', toolName='Bash', contents=[TextContent { text = "Command: 检查最近的 git 提交记录
+$ git log --oneline -10 2>/dev/null || echo "Not a git repository or no commits"
+
+── stdout ──
+"Not a git repository or no commits"
+
+── stderr ──
+系统找不到指定的路径。
+
+Exit code: 0" }], isError=false, attributes={}}, ToolExecutionResultMessage{id='call_01_IqnkfOZwCHYC6vqzHYkI7870', toolName='Glob', contents=[TextContent { text = "Glob: **/*.md
+Path: D:\idea-work\dev-pivot
+Matches: 1
+────────────────────────────────────────────────────────────
+  src/main/resources/prompt/coding-agent.md  (1.8 KB)
+" }], isError=false, attributes={}}, ToolExecutionResultMessage{id='call_02_7TqGoEK0RuysDCgKLVvm9162', toolName='Bash', contents=[TextContent { text = "Command: 列出项目根目录结构
+$ ls -la
+
+── stderr ──
+'ls' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+Exit code: 1" }], isError=false, attributes={}}], parameters = OpenAiChatRequestParameters{modelName="deepseek-v4-pro", temperature=0.7, topP=null, topK=null, frequencyPenalty=null, presencePenalty=null, maxOutputTokens=null, stopSequences=[], toolSpecifications=[ToolSpecification { name = "Bash", description = "执行bash命令并返回输出。必填: command。可选: description/timeout/run_in_background/dangerouslyDisableSandbox。后台返回task_id。", parameters = JsonObjectSchema {description = null, properties = {arg0=JsonStringSchema {description = "要执行的shell命令" }, arg1=JsonStringSchema {description = "命令描述" }, arg2=JsonIntegerSchema {description = "超时毫秒数，默认120000" }, arg3=JsonBooleanSchema {description = "是否后台运行" }, arg4=JsonBooleanSchema {description = "是否禁用沙箱" }}, required = [arg0, arg1, arg2, arg3, arg4], additionalProperties = null, definitions = {} }, metadata = {}, strict = null }, ToolSpecification { name = "Edit", description = "在文件中执行精确的字符串替换。old_string必须与文件内容完全一致（含空白/缩进）且唯一。replace_all=true替换全部匹配项。", parameters = JsonObjectSchema {description = null, properties = {arg0=JsonStringSchema {description = "文件绝对路径" }, arg1=JsonStringSchema {description = "要被替换的文本，必须完全一致且唯一" }, arg2=JsonStringSchema {description = "替换后的文本" }, arg3=JsonBooleanSchema {description = "是否替换全部匹配项" }}, required = [arg0, arg1, arg2, arg3], additionalProperties = null, definitions = {} }, metadata = {}, strict = null }, ToolSpecification { name = "Glob", description = "快速文件模式匹配搜索。**匹配多级目录，*匹配单层文件名。结果按修改时间降序排列。", parameters = JsonObjectSchema {description = null, properties = {arg0=JsonStringSchema {description = "glob模式，如 **/*.js" }, arg1=JsonStringSchema {description = "搜索基准目录，默认当前目录" }}, required = [arg0, arg1], additionalProperties = null, definitions = {} }, metadata = {}, strict = null }, ToolSpecification { name = "Grep", description = "基于正则表达式的内容搜索。必填: pattern。可选: path/glob/output_mode/-A/-B/-C/-i/-n/multiline/head_limit/type。参数以JSON格式传入。", parameters = JsonObjectSchema {description = null, properties = {arg0=JsonStringSchema {description = "搜索参数JSON，至少包含pattern字段" }}, required = [arg0], additionalProperties = null, definitions = {} }, metadata = {}, strict = null }, ToolSpecification { name = "Read", description = "读取本地文件系统中的文件内容，以cat -n格式返回文件内容，包含行号。支持offset和limit参数进行分段读取，也支持PDF页码范围。", parameters = JsonObjectSchema {description = null, properties = {arg0=JsonStringSchema {description = "文件绝对路径，必须为绝对路径" }, arg1=JsonIntegerSchema {description = "起始行号（从1开始）" }, arg2=JsonIntegerSchema {description = "读取行数上限，默认2000" }, arg3=JsonStringSchema {description = "PDF文件的页面范围，如"1-5"" }}, required = [arg0, arg1, arg2, arg3], additionalProperties = null, definitions = {} }, metadata = {}, strict = null }, ToolSpecification { name = "Write", description = "写入文件到本地文件系统。若文件已存在则覆盖，自动创建父级目录。", parameters = JsonObjectSchema {description = null, properties = {arg0=JsonStringSchema {description = "文件绝对路径" }, arg1=JsonStringSchema {description = "要写入的完整内容" }}, required = [arg0, arg1], additionalProperties = null, definitions = {} }, metadata = {}, strict = null }], toolChoice=null, responseFormat=null, maxCompletionTokens=null, logitBias={}, parallelToolCalls=null, seed=null, user=null, store=null, metadata={}, serviceTier=null, reasoningEffort=null, logprobs=null, topLogprobs=null, customParameters={}} }

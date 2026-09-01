@@ -1,0 +1,8 @@
+{
+  "model": {
+    "baseUrl": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    "modelName": "glm-5.2",
+    "apiKey": "xxxxxxxxxxxxxxxxxxx",
+    "temperature": 0.5
+  }
+}

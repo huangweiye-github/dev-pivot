@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" shutdownHook="disable">
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1.} - %msg%n</Property>
+        <Property name="LLM_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %replace{%msg}{\r?\n}{}%n</Property>
+    </Properties>
+
+    <Appenders>
+
+        <File name="Console" fileName="${sys:log4j2.console.file:-logs/console.log}" append="false">
+            <PatternLayout pattern="${sys:log4j2.pattern:-${LOG_PATTERN}}"/>
+        </File>
+
+        <File name="CliConsoleFile" fileName="${sys:log4j2.cli.file:-logs/CliConsole.log}" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
+
+        <File name="File" fileName="${sys:log4j2.file:-logs/dev-pivot.log}" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
+
+        <File name="LLMChatModelFile" fileName="${sys:log4j2.llm.file:-logs/LLMChatModelFile.log}" append="false">
+            <PatternLayout pattern="${LLM_PATTERN}"/>
+        </File>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="${sys:log4j2.level:-INFO}">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+
+        <Logger name="com.hwy.devpivot" level="${sys:log4j2.app.level:-DEBUG}" additivity="false">
+            <AppenderRef ref="LLMChatModelFile"/>
+        </Logger>
+
+        <Logger name="com.hwy.devpivot.cli.jline.JlineConsole" level="DEBUG" additivity="false">
+            <AppenderRef ref="CliConsoleFile"/>
+        </Logger>
+
+        <Logger name="com.hwy.devpivot.agent.listener.LLMChatModelListener" level="DEBUG" additivity="false">
+            <AppenderRef ref="LLMChatModelFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>
