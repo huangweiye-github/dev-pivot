@@ -5,7 +5,7 @@
 ## 启动流程
 1、先在settings.json 文件中配置LLM
 
-2、启动 JlienMain.java
+2、启动 JlienMain.java 或者 启动 start-cli.bat
 
 ## 技术栈
 
